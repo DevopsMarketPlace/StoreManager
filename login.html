@@ -25,8 +25,7 @@
     $("#login").click(function(){
     var username = $("#username").val();
     var password = $("#password").val();
-    alert(username+password);
-
+   
     if(username=='' || password=='')
     {
       alert('Username or password can not be left balnk');
@@ -38,7 +37,8 @@
         
          if(xhr.status&&xhr.status==200)
          {
-          var url = "index.html?uid=" + data;
+          alert(data.uid);
+          var url = "dashboard.html?uid=" + data.uid+"&uname="+data.firstname+"_"+data.lastname;
           $(location).attr('href',url);
          }
       })
@@ -50,6 +50,8 @@
         }
       
       });
+      
+
       
     }
     
