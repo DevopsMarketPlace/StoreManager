@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Add Store</title>
+  <title>View Orders</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,11 +19,15 @@
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 
+  
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="js/addstore.js"></script>
-  <script src="js/dashboard.js"></script>
-  <style>
-  button {
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="js/showorders.js"></script>
+ <script src="js/dashboard.js"></script>
+ <style>
+
+    button {
     background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
@@ -32,14 +36,28 @@
     outline:none;
     color: white;
 }
-</style>
+.mylink {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: blue;
+}
+ </style>
+
+
+<!-- Custom styles for this page -->
+
 </head>
 
 <body id="page-top">
 
   <!-- Page Wrapper -->
   <div id="wrapper">
-<!-- Sidebar ------------------------------------------------------------------------->
+
+  <!-- Sidebar ------------------------------------------------------------------------->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
   <div class="sidebar-brand d-flex align-items-center justify-content-center">Store Manager</div>
   
@@ -142,65 +160,49 @@
      </nav>
      <!-- End of Topbar --------------------------------------------------------------------->
 
-    
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Add New Store</h1>
+          <h1 class="h3 mb-4 text-gray-800">Show Orders</h1>
           <br>
-          <form id='form' >
+          <div class="row">
+              <div class='col-xl-4'>
+          <label>Select a particular store: </label>
+          <select id="storelist">
+              
+          </select>
+          </div>
+          <div class='col-xl-4'>
+            <label>Select a Delivery Type: </label>
+          <select id="deltype" value='delivery'>
+              
+              <option value='delivery'>Delivery</option>
+              <option value='pickup'>Pick Up</option>
+          </select> 
+         
+            </div>
+            <div class='col-xl-4'>
+            <button id="orders" class='btn btn-primary btn-user btn-block'>Submit</button>  
+             
+            </div>
+          </div>
+          <hr/>
+          
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
-                <tr>
-                    <td>Store Name:</td>
-                    <td><input type='text' name='name' id='name'required placeholder="Enter Store name"/></td>
-                </tr>
-                <tr>
-                    <td>Store Opening Time:</td>
-                    <td><input type='time' name='startTime' id='startTime' required /></td>
-                </tr>
-                <tr>
-                    <td>Store Closing Time:</td>
-                    <td><input type='time' name='endTime' id='endTime' required /></td>
-                </tr>
-                <tr>
-                    <td>Duration(Per slot in minutes):</td>
-                    <td><input type='number' name='duration' id='duration'required min="10" placeholder="Enter duration in minutes"/></td>
-                </tr>
-                <tr>
-                    <td>Person per slot:</td>
-                    <td><input type='number' name='persons' id='person' step='1' min="1"  required placeholder='Enter person count'/></td>
-                </tr>
-                <tr >
-                    <td >Address:</td><td></td>
-                 </tr>
-                 <tr>
-                    <td>City:</td>
-                    <td><input type='text' name='city' id='city' required placeholder="Enter city name" /></td>
-                </tr>
-                <tr>
-                    <td>Pincode:</td>
-                    <td><input type='text' name='pincode' id='pincode' required  placeholder="Enter your location pincode" /></td>
-                </tr>
-                <!-- <tr>
-                    <td><label>latitude:</label>
-                    <input type='number' name='lat' value={lat} min='0' /></td>
-                    <td><label>longitude:</label>
-                    <input type='number' name='long' value={long} onChange={this.changeHandler}/></td>
-                    
-                </tr> -->
-                <tr>
-                    <td colSpan='2'>
-                        <input type='submit' value='Create' id='create' class="btn btn-primary btn-user btn-block"/>
-                    </td>
-                </tr>
+            <div class="table-responsive" style='overflow-y: scroll; height: 300px;'>
+              <table class="table table-bordered" width="100%" cellspacing="0" id="showorders">
+               
+             
+                
+               
                 </table>
+                
                 </div>
+                <div id="result"></div>
                 </div>
-                </form>
+               
 
 
 
